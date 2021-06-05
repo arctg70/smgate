@@ -1,17 +1,25 @@
 ## 树莓派透明翻墙网关设置
 simonzhou edited this page on 5 June 2021 · 1 revisions
 
-使用方法，路由器局域网ip设置为192.168.99.1，关闭路由器LAN口的dhcp功能。将设置好的树莓派用网线连接路由器上去。即可。 推荐使用一个单独的路由器，做为从路由配合树莓派使用。路由器性能不做要求，能正常使用就可。
+使用方法，假定主路由器局域网ip设置为192.168.99.1。将设置好的树莓派用网线连接路由器上去。即可。 
 
-特别注意：连接到此路由器的设备网络连接属性设置必须为自动获取DNS，网关，和IP地址
+使用一个单独的路由器，做为主路由配合树莓派使用。主路由器性能不做要求，能正常使用就可。
 
-使用效果，树莓派与路由器组成透明翻墙网关，只要是连接到这个路由中的设备，自动翻墙，无需再安装设置翻墙软件。本例所配置的json为白名单。 使用v2ray自带的国内IP列表与国内常用网站domain列表。列表中的网站与IP直连。不在列表中的走代理网络。
+正常的不需要翻墙的机器，自动从主路由获取ip和路由信息。
+
+需要翻墙的机器，手动设置路由为树莓派的ip。树莓派作为透明翻墙网关，只要是连接到这个网关的设备，自动翻墙，无需再安装设置翻墙软件。
 
 ---------------------安装步骤--------------------------------
 
 准备一个路由器，价格性能不做要求，只要能正常使用就行。 先进入到路由器设置界面，把路由器的LAN口地址IP设置为192.168.99.1。并且使用路由器正常联网。
 
-用树莓派3B做网关代理设备。如果家用100M以上宽带请更换为3B+或树莓派4。树莓派系统为Debian 8，系统镜像为：2017-07-05-raspbian-jessie-lite.img，下载地址：https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-07-05/2017-07-05-raspbian-jessie-lite.zip
+用树莓派做从路由透明网关设备。
+
+### 准备树莓派
+
+树莓派系统目前为Debian 9，系统镜像为：2017-07-05-raspbian-jessie-lite.img，下载地址：
+
+> https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-07-05/2017-07-05-raspbian-jessie-lite.zip
 
 下载镜像后，用USB Image Tool或Win32DiskImager、树莓派官方推荐使用Etcher等工具，写入到TF卡中。
 
@@ -135,13 +143,13 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 ### 配置iptable转发规则
 
-> nano /etc/v2ray/v2rayiptable.sh
+> nano /etc/clashiptable.sh
 
-内容见： https://raw.githubusercontent.com/MassSmith/smgate/master/v2rayiptable.sh
+内容见： https://raw.githubusercontent.com/arctg70/smgate/master/clashiptable.sh
 
 保存退出
 
-> chmod +x /etc/v2ray/v2rayiptable.sh
+> chmod +x /etc/clashiptable.sh
 
 ### 添加开机启动
 
@@ -149,7 +157,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 在exit 0前面添加如下内容
 
-> sudo bash /etc/v2ray/v2rayiptable.sh
+> sudo bash /etc/clashiptable.sh
 
 保存退出
 
@@ -157,17 +165,9 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 至此设置结束。 
 
-进入到路由器设置界面，将LAN口的DHCP功能关闭。重启路由器与树莓派。
+### 测试透明网关
 
-注意，如果刚设置好，但是无法正确使用，windows下可以在CMD下运行：
-
-ipconfig /release
-
-再运行：
-
-ipconfig /renew
-
-然后再重新连接翻墙网关路由器。
+将上网设备连接到局域网中，设置手动网关为树莓派192.168.99.2，DNS为192.168.99.2
 
 打开以下网址，测试用于访问国内与国外的IP： http://ip111.cn/
 
