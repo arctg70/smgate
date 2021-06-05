@@ -71,117 +71,58 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 以下命令操作，均在root账户下。
 
-更换国内源
+- 更换国内源
 
-nano /etc/apt/sources.list
+> nano /etc/apt/sources.list
 
 注释原来的源,添加下列内容：
 
-#debian 8 jessie 源：
+> #debian 8 jessie 源：
 
-deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+> deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
 
-#deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+> #deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
 
-更换archive.raspberrypi.org源
+- 更换archive.raspberrypi.org源
 
 将 /etc/apt/sources.list.d/raspi.list 文件中默认的源地址 http://archive.raspberrypi.org/ 替换为 http://mirrors.ustc.edu.cn/archive.raspberrypi.org/ 即可。
 
-sudo nano /etc/apt/sources.list.d/raspi.list
+> sudo nano /etc/apt/sources.list.d/raspi.list
 
 注释原来的源,添加下列内容：
 
-#debian 8 jessie 源
+> #debian 8 jessie 源
+> deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
+> #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
 
-deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
+- 停用本机的时间同步
 
-#deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
+> update-rc.d -f ntpd remove
+> update-rc.d -f ntp remove
 
-停用本机的时间同步
+- 安装ntpdate
 
-update-rc.d -f ntpd remove
-
-update-rc.d -f ntp remove
-
-安装ntpdate
-
-apt install ntpdate -y
+> apt install ntpdate -y
 
 设置自动每5分钟同步一次。因为v2ray对时间有严格要求。
 
-sudo crontab -e
+> sudo crontab -e
 
 编辑工具选择nano， 最后添加一行：
 
-*/5 * * * * /usr/sbin/ntpdate 114.118.7.163
+> */5 * * * * /usr/sbin/ntpdate 114.118.7.163
 
-树莓派开启 IP 转发。 执行命令：nano /etc/sysctl.conf
+- 树莓派开启 IP 转发。 
+执行命令：
+> nano /etc/sysctl.conf
 
 文件最后添加：
 
-net.ipv4.ip_forward=1
+> net.ipv4.ip_forward=1
+> net.ipv6.conf.all.forwarding = 1
 
-net.ipv6.conf.all.forwarding = 1
-
-执行命令生效： sysctl -p
-
-安装v2ray
-
-apt update
-
-apt install -y curl
-
-bash <(curl -L -s https://install.direct/go.sh)
-
-因为防火墙的原因，安装可能会比较慢，请耐心等待，如果不成功，请安下面的方法： 加上代理：
-
-下载go.sh：https://install.direct/go.sh 下载v2ray。
-
-https://github.com/v2ray/v2ray-core/releases
-
-这里下载相对应的文件。v2ray-linux-arm.zip
-
-将go.sh与v2ray-linux-arm.zip复制到树莓派中，在同一个目录下。 运行命令:
-
-bash go.sh --local v2ray-linux-arm.zip
-
-安装成功后，配置参数。
-
-查看版本：
-
-/usr/bin/v2ray/v2ray -version
-
-mv /etc/v2ray/config.json /etc/v2ray/config.json.bak
-
-nano /etc/v2ray/config.json
-
-内容见config.json
-
-https://raw.githubusercontent.com/MassSmith/smgate/master/config/tcp-config/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BD%91%E5%85%B3v2ray%E7%9A%84config.json%E6%A8%A1%E6%9D%BF/tcp-config.json
-
-更多配置模板见：
-
-https://github.com/MassSmith/smgate/tree/master/config
-
-以上配置文件中：
-
-"address": "xxxxxxxxxxx",换成自己v2ray节点的ip或域名。
-
-"port": xxxx,换成自己v2ray节点的端口。
-
-"id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",换成自己v2ray节点的UUID
-
-测试配置文件是否正确。注意必须以上各项替换为自己的节点后，运行：
-
-/usr/bin/v2ray/v2ray -test -config=/etc/v2ray/config.json
-
-用以下命令控制，v2ray的启动，重启，停止。
-
-systemctl start v2ray
-
-systemctl restart v2ray
-
-systemctl stop v2ray
+执行命令生效： 
+> sysctl -p
 
 安装配置Dasmasq
 
