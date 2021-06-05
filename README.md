@@ -1,4 +1,4 @@
-树莓派透明翻墙网关设置
+## 树莓派透明翻墙网关设置
 simonzhou edited this page on 5 June 2021 · 1 revisions
 使用方法，路由器局域网ip设置为192.168.99.1，关闭路由器LAN口的dhcp功能。将设置好的树莓派用网线连接路由器上去。即可。 推荐使用一个单独的路由器，做为从路由配合树莓派使用。路由器性能不做要求，能正常使用就可。
 
@@ -22,19 +22,19 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 修改root账户密码：
 
-sudo passwd root
+> sudo passwd root
 
 输入两次密码。
 
 开启root登录
 
-sudo nano /etc/ssh/sshd_config
+> sudo nano /etc/ssh/sshd_config
 
 找到 PermitRootLogin without-password 修改为： PermitRootLogin yes
 
 保存退出，重启ssh服务。
 
-sudo /etc/init.d/ssh restart
+> sudo /etc/init.d/ssh restart
 
 树莓派设置静态 IP（192.168.99.2），与路由器 LAN 口同一个网段，默认网关为路由器的IP（192.168.99.1）
 
