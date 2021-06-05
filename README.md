@@ -92,12 +92,15 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 注释原来的源,添加下列内容：
 
 > #debian 8 jessie 源
+
 > deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
+
 > #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
 
 - 停用本机的时间同步
 
 > update-rc.d -f ntpd remove
+
 > update-rc.d -f ntp remove
 
 - 安装ntpdate
@@ -113,68 +116,24 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 > */5 * * * * /usr/sbin/ntpdate 114.118.7.163
 
 - 树莓派开启 IP 转发。 
+
 执行命令：
+
 > nano /etc/sysctl.conf
 
 文件最后添加：
 
 > net.ipv4.ip_forward=1
+
 > net.ipv6.conf.all.forwarding = 1
 
 执行命令生效： 
+
 > sysctl -p
 
-安装配置Dasmasq
+- 配置iptable转发规则
 
-apt update
-
-apt install dnsmasq -y
-
-mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
-
-nano /etc/dnsmasq.conf
-
-添加内容如下：
-
-port=0
-
-no-resolv
-
-no-poll
-
-no-hosts
-
-no-negcache
-
-cache-size=81920
-
-local=192.168.99.2
-
-interface=eth0
-
-bind-interfaces
-
-dhcp-range=192.168.99.50,192.168.99.150,255.255.255.0,12h
-
-dhcp-option=3,192.168.99.2
-
-dhcp-option=6,192.168.99.2
-
-log-dhcp
-
-log-facility=/var/log/dnsmasq.log
-
-重启dnsmasq
-
-systemctl start dnsmasq
-
-systemctl restart dnsmasq
-
-systemctl stop dnsmasq
-
-配置iptable转发规则
-
-nano /etc/v2ray/v2rayiptable.sh
+> nano /etc/v2ray/v2rayiptable.sh
 
 内容见： https://raw.githubusercontent.com/MassSmith/smgate/master/v2rayiptable.sh
 
@@ -182,17 +141,17 @@ nano /etc/v2ray/v2rayiptable.sh
 
 chmod +x /etc/v2ray/v2rayiptable.sh
 
-添加开机启动
+- 添加开机启动
 
-nano /etc/rc.local
+> nano /etc/rc.local
 
 在exit 0前面添加如下内容
 
-sudo bash /etc/v2ray/v2rayiptable.sh
+> sudo bash /etc/v2ray/v2rayiptable.sh
 
 保存退出
 
-systemctl daemon-reload
+> systemctl daemon-reload
 
 至此设置结束。 进入到路由器设置界面，将LAN口的DHCP功能关闭。重启路由器与树莓派。
 
@@ -207,5 +166,4 @@ ipconfig /renew
 然后再重新连接翻墙网关路由器。
 
 打开以下网址，测试用于访问国内与国外的IP： http://ip111.cn/
-
 
