@@ -17,9 +17,11 @@ simonzhou edited this page on 5 June 2021 · 1 revisions
 
 ### 准备树莓派
 
-树莓派系统目前为Debian 9，系统镜像为：2017-07-05-raspbian-jessie-lite.img，下载地址：
+树莓派系统目前为Debian 9，系统镜像为：2021-05-07-raspios-buster-armhf.img ，下载地址：
 
-> https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-07-05/2017-07-05-raspbian-jessie-lite.zip
+> https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2021-05-28/2021-05-07-raspios-buster-armhf.zip
+
+> https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-lite.zip
 
 下载镜像后，用USB Image Tool或Win32DiskImager、树莓派官方推荐使用Etcher等工具，写入到TF卡中。
 
@@ -87,11 +89,11 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 注释原来的源,添加下列内容：
 
-    #debian 8 jessie 源：
+    #debian 9 buster 源：
 
-    deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+    deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
 
-    #deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+    #deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
 
 更换archive.raspberrypi.org源
 
@@ -101,29 +103,11 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 注释原来的源,添加下列内容：
 
-    #debian 8 jessie 源
+    #debian 9 buster 源
 
-    deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
+    deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
 
-    #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
-
-### 停用本机的时间同步
-
-> update-rc.d -f ntpd remove
-
-> update-rc.d -f ntp remove
-
-### 安装ntpdate
-
-> apt install ntpdate -y
-
-设置自动每5分钟同步一次。因为v2ray对时间有严格要求。
-
-> sudo crontab -e
-
-编辑工具选择nano， 最后添加一行：
-
-    */5 * * * * /usr/sbin/ntpdate 114.118.7.163
+    #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
 
 ### 树莓派开启 IP 转发。 
 
