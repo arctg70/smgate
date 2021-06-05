@@ -47,21 +47,21 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 使用 nano编辑文件，添加下列配置项
 
-- 指定接口 eth0
+    #指定接口 eth0
 
-> interface eth0
+    interface eth0
 
-- 指定静态IP，/24表示子网掩码为 255.255.255.0
+    #指定静态IP，/24表示子网掩码为 255.255.255.0
 
-> static ip_address=192.168.99.2/24
+    static ip_address=192.168.99.2/24
 
-- 路由器/网关IP地址
+    #路由器/网关IP地址
 
-> static routers=192.168.99.1
+    static routers=192.168.99.1
 
-- 手动自定义DNS服务器
+    #手动自定义DNS服务器
 
-> static domain_name_servers=114.114.114.114
+    static domain_name_servers=114.114.114.114
 
 重启树莓派。
 
@@ -77,11 +77,11 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 注释原来的源,添加下列内容：
 
-> #debian 8 jessie 源：
+    #debian 8 jessie 源：
 
-> deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+    deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
 
-> #deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+    #deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
 
 - 更换archive.raspberrypi.org源
 
@@ -91,11 +91,11 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 注释原来的源,添加下列内容：
 
-> #debian 8 jessie 源
+    #debian 8 jessie 源
 
-> deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
+    deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
 
-> #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
+    #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
 
 - 停用本机的时间同步
 
@@ -113,7 +113,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 编辑工具选择nano， 最后添加一行：
 
-> */5 * * * * /usr/sbin/ntpdate 114.118.7.163
+    */5 * * * * /usr/sbin/ntpdate 114.118.7.163
 
 - 树莓派开启 IP 转发。 
 
@@ -123,9 +123,9 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 文件最后添加：
 
-> net.ipv4.ip_forward=1
+    net.ipv4.ip_forward=1
 
-> net.ipv6.conf.all.forwarding = 1
+    net.ipv6.conf.all.forwarding = 1
 
 执行命令生效： 
 
@@ -139,7 +139,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 保存退出
 
-chmod +x /etc/v2ray/v2rayiptable.sh
+> chmod +x /etc/v2ray/v2rayiptable.sh
 
 - 添加开机启动
 
