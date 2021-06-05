@@ -21,13 +21,13 @@ TF卡写好系统后，一般会变成两个分区，其中一个名称为boot,�
 
 TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名：pi 密码：raspberry。 树莓派的IP可以进到路由器中查找。 
 
-修改root账户密码：
+### 修改root账户密码：
 
 > sudo passwd root
 
 输入两次密码。
 
-开启root登录
+### 开启root登录
 
 > sudo nano /etc/ssh/sshd_config
 
@@ -36,6 +36,8 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 保存退出，重启ssh服务。
 
 > sudo /etc/init.d/ssh restart
+
+### 设置静态IP
 
 树莓派设置静态 IP（192.168.99.2），与路由器 LAN 口同一个网段，默认网关为路由器的IP（192.168.99.1）
 
@@ -71,7 +73,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 以下命令操作，均在root账户下。
 
-- 更换国内源
+### 更换国内源
 
 > nano /etc/apt/sources.list
 
@@ -83,7 +85,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
     #deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
 
-- 更换archive.raspberrypi.org源
+更换archive.raspberrypi.org源
 
 将 /etc/apt/sources.list.d/raspi.list 文件中默认的源地址 http://archive.raspberrypi.org/ 替换为 http://mirrors.ustc.edu.cn/archive.raspberrypi.org/ 即可。
 
@@ -97,13 +99,13 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
     #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ jessie main ui
 
-- 停用本机的时间同步
+### 停用本机的时间同步
 
 > update-rc.d -f ntpd remove
 
 > update-rc.d -f ntp remove
 
-- 安装ntpdate
+### 安装ntpdate
 
 > apt install ntpdate -y
 
@@ -115,7 +117,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
     */5 * * * * /usr/sbin/ntpdate 114.118.7.163
 
-- 树莓派开启 IP 转发。 
+### 树莓派开启 IP 转发。 
 
 执行命令：
 
@@ -131,7 +133,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 > sysctl -p
 
-- 配置iptable转发规则
+### 配置iptable转发规则
 
 > nano /etc/v2ray/v2rayiptable.sh
 
@@ -141,7 +143,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 > chmod +x /etc/v2ray/v2rayiptable.sh
 
-- 添加开机启动
+### 添加开机启动
 
 > nano /etc/rc.local
 
@@ -153,7 +155,9 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 > systemctl daemon-reload
 
-至此设置结束。 进入到路由器设置界面，将LAN口的DHCP功能关闭。重启路由器与树莓派。
+至此设置结束。 
+
+进入到路由器设置界面，将LAN口的DHCP功能关闭。重启路由器与树莓派。
 
 注意，如果刚设置好，但是无法正确使用，windows下可以在CMD下运行：
 
