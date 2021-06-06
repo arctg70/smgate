@@ -90,9 +90,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 注释原来的源,添加下列内容：
 
     #debian 9 buster 源：
-
     deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
-
     #deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
 
 更换archive.raspberrypi.org源
@@ -104,9 +102,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 注释原来的源,添加下列内容：
 
     #debian 9 buster 源
-
     deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
-
     #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
 
 ### 安装clash
@@ -121,7 +117,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 将clash的配置文件拷贝到/opt/clash目录中。
 
-配置文件的头部
+配置文件config.yaml的头部
 
     port: 7890
     socks-port: 1081
@@ -169,11 +165,13 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
     [Unit]
     Description=clash service
     After=network.target
+
     [Service]
     Type=simple
     User=root
     ExecStart=/opt/clash/clash -d /opt/clash
     Restart=on-failure # or always, on-abort, etc
+
     [Install]
     WantedBy=multi-user.target
 
@@ -190,7 +188,6 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 文件最后添加：
 
     net.ipv4.ip_forward=1
-
     net.ipv6.conf.all.forwarding = 1
 
 执行命令生效： 
