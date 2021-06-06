@@ -121,6 +121,37 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 将clash的配置文件拷贝到/opt/clash目录中。
 
+配置文件的头部
+
+    port: 7890
+    socks-port: 1081
+    redir-port: 9280
+    allow-lan: true
+    mode: rule
+    log-level: info
+    #external-controller: 127.0.0.1:9090
+    secret: "123456"
+    external-controller: 0.0.0.0:6300
+    external-ui: clash-dashboard
+    # secret: "your-secret-passphrase"
+    
+    dns:
+      enable: true
+      ipv6: false
+      listen: 0.0.0.0:53
+      enhanced-mode: redir-host
+      default-nameserver:
+          - 8.8.8.8
+          - 114.114.114.114
+      nameserver:
+        - 114.114.114.114 # default value
+        - 8.8.8.8 # default value
+        - tls://dns.rubyfish.cn:853 # DNS over TLS
+        - https://1.1.1.1/dns-query # DNS over HTTPS
+      fallback:
+          - tls://1.1.1.1:853
+          - tls://dns.google
+
 ### 安装clash Dashbord
 
 在clash目录下安装。
