@@ -111,13 +111,44 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 ### 安装clash
 
-'''
-wget https://github.com/Dreamacro/clash/releases/download/v1.6.0/clash-linux-armv8-v1.6.0.gz
-gunzip clash-linux-armv8-v1.6.0.gz
-mv clash-linux-armv8 /opt/clash/clash
-chmod +x /opt/clash/clash
-'''
+>wget https://github.com/Dreamacro/clash/releases/download/v1.6.0/clash-linux-armv8-v1.6.0.gz
 
+>gunzip clash-linux-armv8-v1.6.0.gz
+
+>mv clash-linux-armv8 /opt/clash/clash
+
+>chmod +x /opt/clash/clash
+
+将clash的配置文件拷贝到/opt/clash目录中。
+
+### 安装clash Dashbord
+
+在clash目录下安装。
+
+> cd /opt/clash
+
+> git clone https://github.com/Dreamacro/clash-dashboard.git
+
+> git checkout -b gh-pages origin/gh-pages
+
+### 设置clash自动启动
+
+> nano /etc/systemd/system/clash.service
+
+    [Unit]
+    Description=clash service
+    After=network.target
+    [Service]
+    Type=simple
+    User=root
+    ExecStart=/opt/clash/clash -d /opt/clash
+    Restart=on-failure # or always, on-abort, etc
+    [Install]
+    WantedBy=multi-user.target
+
+> service clash start
+
+> systemctl enable clash
 
 ### 树莓派开启 IP 转发
 
