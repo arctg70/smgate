@@ -109,6 +109,16 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
     #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
 
+### 安装clash
+
+'''
+wget https://github.com/Dreamacro/clash/releases/download/v1.6.0/clash-linux-armv8-v1.6.0.gz
+gunzip clash-linux-armv8-v1.6.0.gz
+mv clash-linux-armv8 /opt/clash/clash
+chmod +x /opt/clash/clash
+'''
+
+
 ### 树莓派开启 IP 转发
 
 执行命令：
