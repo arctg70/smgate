@@ -207,7 +207,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
     iptables -t nat -A CLASH -d 224.0.0.0/4 -j RETURN
     iptables -t nat -A CLASH -d 240.0.0.0/4 -j RETURN
     
-    # Redirect all TCP traffic to 8890 port, where Clash listens
+    # Redirect all TCP traffic to 9280 port, where Clash listens
     iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 9280
     iptables -t nat -A PREROUTING -p tcp -j CLASH
 
