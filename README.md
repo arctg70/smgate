@@ -157,6 +157,8 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 > nano /etc/systemd/system/clash.service
 
+编辑clash.service内容如下：
+
     [Unit]
     Description=clash service
     After=network.target
@@ -169,6 +171,8 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
     [Install]
     WantedBy=multi-user.target
+
+保存退出nano后，执行：
 
 > service clash start
 
@@ -193,7 +197,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 > nano /etc/clashiptable.sh
 
-内容见： https://raw.githubusercontent.com/arctg70/smgate/master/clashiptable.sh
+内容见： https://github.com/arctg70/smgate/blob/master/clashiptable.sh
 
     # Create CLASH chain
     iptables -t nat -N CLASH
