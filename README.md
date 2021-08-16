@@ -98,6 +98,24 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
     deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
     #deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
 
+### 关闭wifi 
+
+>sudo apt update
+
+>sudo apt full-upgrade
+
+>sudo apt install rfkill
+
+>sudo rfkill block wifi
+
+也可以关闭蓝牙
+
+>sudo rfkill block bluetooth
+
+必要时可以重新打开wifi
+
+>sudo rfkill unblock wifi
+
 ### 安装clash
 
 当前的clash版本是1.6.0，树莓派4对应的是armv8版本。因为墙的缘故，wget指令大概率无法下载到文件。最好在PC上下载传到树莓派去。
