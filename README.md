@@ -118,13 +118,13 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 ### 安装clash
 
-当前的clash版本是1.6.0，树莓派4对应的是armv7版本。因为墙的缘故，wget指令大概率无法下载到文件。最好在PC上下载传到树莓派去。
+当前的clash版本是1.6.5，树莓派4对应的是armv7版本。因为墙的缘故，wget指令大概率无法下载到文件。最好在PC上下载传到树莓派去。
 
->wget https://github.com/Dreamacro/clash/releases/download/v1.6.0/clash-linux-armv7-v1.6.0.gz
+>wget https://github.com/Dreamacro/clash/releases/download/v1.6.5/clash-linux-armv7-v1.6.5.gz
 
->gunzip clash-linux-armv7-v1.6.0.gz
+>gunzip clash-linux-armv7-v1.6.5.gz
 
->mv clash-linux-armv7 /opt/clash/clash
+>mv clash-linux-armv7-v1.6.5 /opt/clash/clash
 
 >chmod +x /opt/clash/clash
 
