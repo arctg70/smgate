@@ -21,4 +21,4 @@ fi
 sudo bash /etc/clashiptable.sh
 
 exit 0
-supervisord -c /etc/supervisor/supervisord.conf
+# supervisord -c /etc/supervisor/supervisord.conf
