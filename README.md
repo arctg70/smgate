@@ -130,11 +130,11 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 上面下载的是clash的普通版。为了能够支持更多的特性，可以下载Premium版本。介绍的网页是https://github.com/Dreamacro/clash/releases/tag/premium
 
->wget https://github.com/Dreamacro/clash/releases/download/premium/clash-linux-armv7-2021.07.03.gz
+>wget https://github.com/Dreamacro/clash/releases/download/premium/clash-linux-armv7-2021.12.07.gz 
 
->gunzip clash-linux-armv7-2021.07.03.gz
+>gunzip clash-linux-armv7-2021.12.07.gz
 
->mv clash-linux-armv7-2021.07.03 /opt/clash/clash
+>mv clash-linux-armv7-2021.12.07 /opt/clash/clash
 
 >chmod +x /opt/clash/clash
 
