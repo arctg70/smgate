@@ -158,7 +158,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
       enable: true
       ipv6: false
       listen: 0.0.0.0:53
-      enhanced-mode: redir-host
+      enhanced-mode: fake-ip
       default-nameserver:
           - 8.8.8.8
           - 114.114.114.114
