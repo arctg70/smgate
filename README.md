@@ -1,6 +1,8 @@
 ## 树莓派透明翻墙网关设置
 simonzhou edited this page on  2023.06.21 · 1 revisions
+
 simonzhou edited this page on 2025.07.15
+
 ### 概述
 
 假定主路由器局域网ip设置为192.168.99.1。将设置好的树莓派用网线连接路由器上去即可。 
