@@ -1,3 +1,12 @@
+# Create CLASH_DNS_RULE chain
+iptables -t nat -N CLASH_DNS_RULE
+iptables -t nat -A PREROUTING -p udp -s 192.168.99.1/16 --dport 53 -j CLASH_DNS_RULE
+iptables -t nat -A PREROUTING -p tcp -s 192.168.99.1/16 --dport 53 -j CLASH_DNS_RULE
+iptables -t nat -A PREROUTING -p udp -s 192.168.99.1/16 --dport 853 -j CLASH_DNS_RULE
+iptables -t nat -A PREROUTING -p tcp -s 192.168.99.1/16 --dport 853 -j CLASH_DNS_RULE
+iptables -t nat -A CLASH_DNS_RULE -p udp -j REDIRECT --to-port 53
+iptables -t nat -A CLASH_DNS_RULE -p tcp -j REDIRECT --to-port 53
+
 # Create CLASH chain
 iptables -t nat -N CLASH
 
