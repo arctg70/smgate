@@ -1,4 +1,4 @@
-# Create CLASH_DNS_RULE chain
+# Create CLASH_DNS_RULE chain 2025.7.15
 iptables -t nat -N CLASH_DNS_RULE
 iptables -t nat -A PREROUTING -p udp -s 192.168.99.1/16 --dport 53 -j CLASH_DNS_RULE
 iptables -t nat -A PREROUTING -p tcp -s 192.168.99.1/16 --dport 53 -j CLASH_DNS_RULE
