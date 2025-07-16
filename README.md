@@ -124,9 +124,11 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 >gunzip clash-linux-armv7-v1.6.5.gz
 
->mv clash-linux-armv7-v1.6.5 /opt/clash/clash
+>mv clash-linux-armv7-v1.6.5 /opt/clash
 
->chmod +x /opt/clash/clash
+>chmod +x /opt/clash/clash-linux-armv7-v1.6.5
+>cd /opt/clash
+>ln -s clash-linux-armv7-v1.6.5 clash
 
 上面下载的是clash的普通版。为了能够支持更多的特性，可以下载Premium版本。介绍的网页是https://github.com/Dreamacro/clash/releases/tag/premium
 
@@ -134,11 +136,22 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 >gunzip clash-linux-armv7-2023.05.29.gz
 
->mv clash-linux-armv7-2023.05.29 /opt/clash/clash
+>mv clash-linux-armv7-2023.05.29 /opt/clash
 
->chmod +x /opt/clash/clash
+>chmod +x /opt/clash/clash-linux-armv7-2023.05.29
+>cd /opt/clash
+>ln -s clash-linux-armv7-2023.05.29 clash
 
 将clash的配置文件拷贝到/opt/clash目录中。
+
+上面的clash和clash Premium都已经停更删库。不过现在也有clash verge以及mihomo可以直接代替。下面是mihomo的当前版本下载（2025.7.15）
+>wget https://github.com/MetaCubeX/mihomo/releases/download/v1.19.11/mihomo-android-armv7-v1.19.11.gz
+>gunzip mihomo-android-armv7-v1.19.11.gz
+>mv mihomo-linux-armv7-v1.19.11 /opt/clash
+>cd /opt/clash
+>ln -s mihomo-linux-armv7-v1.19.11 clash
+
+mihomo的功能更多，也支持更多的配置文件语法。在运行效能上，clash premium可见的延迟更低。
 
 配置文件config.yaml的头部
 
