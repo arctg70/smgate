@@ -162,7 +162,7 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 mihomo的功能更多，也支持更多的配置文件语法。在运行效能上，clash premium可见的延迟更低。
 
-配置文件config.yaml的头部
+下面是配置文件config.yaml的头部片段。需要注意的是，因为这是一个旁路由，clash的工作方式是fake-ip，监听着53端口和853端口的dns请求。关于fake-ip的工作方式，请查阅相关文档。对应的，我们还需要在iptable做设定。
 
     port: 7890
     socks-port: 1081
@@ -175,12 +175,29 @@ mihomo的功能更多，也支持更多的配置文件语法。在运行效能�
     external-controller: 0.0.0.0:6300
     external-ui: clash-dashboard
     # secret: "your-secret-passphrase"
-    
+    unified-delay: true
+    tcp-concurrent: true
+
+    experimental:
+      sniff-tls-sni: true
+    tun:
+      enable: true
+      stack: mixed 
+      dns-hijack:
+        - any:53
+        - tcp://any:53
+        - any:853
+        - tcp://any:853
+      auto-route: true
+      auto-detect-interface: true
     dns:
       enable: true
       ipv6: false
       listen: 0.0.0.0:53
       enhanced-mode: fake-ip
+      fake-ip-range: 198.18.0.1/16 # Fake IP addresses pool CIDR
+      fake-ip-filter:
+        - '*.lan'
       default-nameserver:
           - 8.8.8.8
           - 114.114.114.114
@@ -249,6 +266,15 @@ mihomo的功能更多，也支持更多的配置文件语法。在运行效能�
 
 内容见： https://github.com/arctg70/smgate/blob/master/clashiptable.sh
 
+    # Create CLASH_DNS_RULE chain
+    iptables -t nat -N CLASH_DNS_RULE
+    iptables -t nat -A PREROUTING -p udp -s 192.168.99.1/16 --dport 53 -j CLASH_DNS_RULE
+    iptables -t nat -A PREROUTING -p tcp -s 192.168.99.1/16 --dport 53 -j CLASH_DNS_RULE
+    iptables -t nat -A PREROUTING -p udp -s 192.168.99.1/16 --dport 853 -j CLASH_DNS_RULE
+    iptables -t nat -A PREROUTING -p tcp -s 192.168.99.1/16 --dport 853 -j CLASH_DNS_RULE
+    iptables -t nat -A CLASH_DNS_RULE -p udp -j REDIRECT --to-port 53
+    iptables -t nat -A CLASH_DNS_RULE -p tcp -j REDIRECT --to-port 53
+    
     # Create CLASH chain
     iptables -t nat -N CLASH
     
