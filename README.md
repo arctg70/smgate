@@ -158,6 +158,8 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 >mv mihomo-linux-armv7-v1.19.11 /opt/clash
 
+>chmod +x /opt/clash/mihomo-linux-armv7-2023.05.29
+
 >cd /opt/clash
 
 >ln -s mihomo-linux-armv7-v1.19.11 clash
