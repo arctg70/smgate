@@ -152,9 +152,9 @@ TF卡插入树莓派，启动系统，用putty登录进系统。默认用户名�
 
 上面的clash和clash Premium都已经停更删库。不过现在也有clash verge以及mihomo可以直接代替。下面是mihomo的当前版本下载（2025.7.15）
 
->wget https://github.com/MetaCubeX/mihomo/releases/download/v1.19.11/mihomo-android-armv7-v1.19.11.gz
+>wget https://github.com/MetaCubeX/mihomo/releases/download/v1.19.11/mihomo-linux-armv7-v1.19.11.gz
 
->gunzip mihomo-android-armv7-v1.19.11.gz
+>gunzip mihomo-linux-armv7-v1.19.11.gz
 
 >mv mihomo-linux-armv7-v1.19.11 /opt/clash
 
