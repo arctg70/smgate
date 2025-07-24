@@ -19,7 +19,9 @@ simonzhou edited this page on 2025.07.15
 
 ### 准备树莓派
 
-树莓派系统目前为Debian 9，系统镜像为：2021-05-07-raspios-buster-armhf.img ，下载地址：
+树莓派系统目前为Debian 9，[当然这是2023年的说法，现在已经不是了。但是我的树莓派4一直在跑这个版本，也没出什么差]
+
+系统镜像为：2021-05-07-raspios-buster-armhf.img ，下载地址：
 
 > https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2021-05-28/2021-05-07-raspios-buster-armhf.zip
 
